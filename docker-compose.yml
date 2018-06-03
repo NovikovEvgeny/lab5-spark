@@ -1,0 +1,38 @@
+version: '3'
+networks:
+  lab5network:
+
+services:
+  spark-master:
+      image: spark-lab5-last
+      hostname: spark-master
+      environment:
+        MASTER: spark://spark-master:7077
+        SPARK_CONF_DIR: /conf
+        SPARK_PUBLIC_DNS: 192.168.99.100
+        SPARK_WORKER_INSTANCES: 3
+      ports:
+        - 4040:4040
+        - 6066:6066
+        - 7077:7077
+        - 8080:8080
+      networks:
+        - lab5network
+
+  spark-worker-1:
+      image: spark-lab5-last
+      hostname: spark-worker-1
+      environment:
+        SPARK_CONF_DIR: /conf
+        SPARK_PUBLIC_DNS: 192.168.99.100
+        SPARK_WORKER_CORES: 2
+        SPARK_WORKER_MEMORY: 2g
+        SPARK_WORKER_PORT: 8881
+        SPARK_WORKER_WEBUI_PORT: 8081
+        SPARK_WORKER_INSTANCES: 3
+      ports:
+        - 8081:8081
+      networks:
+        - lab5network
+      depends_on:
+        - spark-master
