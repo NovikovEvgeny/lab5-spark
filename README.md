@@ -1,6 +1,6 @@
 1. Создал 2 виртуальных докер-машины (docker-machine create vmName)
 2. Докер-файл
-3. Создал образы на обеих машинах ("docker build -f spark.df -t spark-lab5-last ."), переключение между машинами: $ eval "$(docker-machine env VMNAME)"
+3. Создал образы на обеих машинах ("docker build -t spark-lab5-last ."), переключение между машинами: $ eval "$(docker-machine env VMNAME)"
 3.1. чтобы не использовать докер-хаб и локальный репозиторий, но в то же время не использовать docker build на обеих машинах, можно сохранить образ как файл на одной машине "docer save -o PATH_TO_FILE IMAGE_NAME" и загрузить на другой "docker load -i PATH_TO_IMAGE" 
 4. init swarm: "docker swarm init" на master VM
 5. подключить воркер-машину: docker swarm join --token SWMTKN-1-1da5t7bxt9a36avgprpaernb3fn2ncnsjd6lppcugeja37ta5a-90beq8otup0cdvecax8k9iwfm 192.168.99.100:2377   (токен, очевидно, будет другой)
